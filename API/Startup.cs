@@ -1,3 +1,4 @@
+using API.HubConfig;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,6 +34,7 @@ namespace API
                 .AllowAnyHeader()
                 .AllowCredentials());
             });
+            services.AddSignalR();
             services.AddControllers();
         }
 
@@ -55,6 +57,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChartHub>("/chart");
             });
         }
     }
